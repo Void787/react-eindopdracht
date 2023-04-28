@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Weather from "./pages/weather";
+
 
 function App() {
+
+
+
   const [weatherData, setWeatherData] = useState({});
 
   useEffect(() => {
@@ -26,21 +32,22 @@ function App() {
   const temperature_use = `The temperature is ${temperature}°C, but it feels like ${feelsLike}°C.`;
   const humidity_use = `The humidity is ${humidity}%.`;
   const list = "<li>" + weather_use + "</li> <li>" + temperature_use + "</li> <li>" + humidity_use + "</li>";
-
   return (
     <body>
       <header>
         <h1>My Website</h1>
         <nav>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><Link to="/Weather">weather</Link></li>
           </ul>
         </nav>
       </header>
       <main>
+        
+          <Routes>
+            <Route path="/Weather" element={<Weather />} />
+          </Routes>
+        
         <section>
           <h2>About Us</h2>
           <p></p>
@@ -49,6 +56,7 @@ function App() {
           <h2>Our Services</h2>
           <ul id="weather" dangerouslySetInnerHTML={{ __html: list }}></ul>
         </section>
+        
       </main>
       <footer>
         <p>Copyright © My Website 2023</p>
